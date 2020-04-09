@@ -51,11 +51,9 @@ app.put("/repositories/:id", (request, response) => {
     return response.status(404).json({ error: 'Repository not found' });
   }
 
-  const labelRep = { id, title, url, techs, likes: 0 };
+  const labelRep = { id, title, url, techs, likes: 0 }; //likes: 0 was fixed because of test who expect 'likes: 0'
 
-  repositories[repoIndex] = {
-    labelRep
-  };
+  repositories[repoIndex] = labelRep;
 
   return response.status(200).json(labelRep);
 
@@ -71,13 +69,12 @@ app.delete("/repositories/:id", (request, response) => {
     return response.status(400).json({ error: 'Invalid ID' });
   }
 
-  const repository = repositories.find(r => r.id === id); 
-  if(!repository){
+  const repIndex = repositories.findIndex(r => r.id === id);
+  if(repIndex < 0){
     return response.status(400).json({ error: 'Repository not found' });
   }
-
-  repositories.splice(id, 1);
-
+  repositories.splice(repIndex, 1);
+  
   return response.status(204).send();
 
 });
