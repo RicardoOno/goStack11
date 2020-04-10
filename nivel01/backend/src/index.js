@@ -1,7 +1,9 @@
 const express = require('express');
 const { uuid, isUuid } = require('uuidV4');
+const cors = require('cors');
 const app = express();
 
+app.use(cors()); // utilização para desenvolvimento | + config quando for prd
 app.use(express.json());
 
 /*
