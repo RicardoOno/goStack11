@@ -39,3 +39,13 @@
  * 
  * Loaders: babel-loader, css-loader, image-loader, file-loader, ....
  */
+
+ # Frament
+  - <></>
+    - Container que não irá possuir efeito visual
+
+# useState
+ - useState retonra um arry com 2 posições
+ - 1. Variavel com o seu valor inicial
+ - 1. Função para atualizarmos esse valor
+
