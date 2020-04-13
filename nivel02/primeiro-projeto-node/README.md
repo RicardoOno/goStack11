@@ -1,6 +1,6 @@
 # @types/...
 
-
+modulos que já possuim o typescript dos modulos
 
 # ts-node-dev (-d)
 
