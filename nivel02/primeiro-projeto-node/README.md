@@ -20,3 +20,9 @@ Padronizar codigos
 ## yarn add -D eslint-import-resolver-typescript
 
 Habilidade do eslint entender o import de um ts
+
+# Prettier
+
+Deixar o codigo mais bonito. Integração com o ESLint
+
+`yarn add prettier eslint-config-prettier eslint-plugin-prettier -D`
