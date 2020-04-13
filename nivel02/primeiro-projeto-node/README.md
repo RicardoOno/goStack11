@@ -16,3 +16,7 @@ Configuração para padronizar editores
 # eslint (-d)
 
 Padronizar codigos
+
+## yarn add -D eslint-import-resolver-typescript
+
+Habilidade do eslint entender o import de um ts
