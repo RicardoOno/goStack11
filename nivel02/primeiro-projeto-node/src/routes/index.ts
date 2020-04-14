@@ -1,19 +1,9 @@
 import { Router } from 'express';
+import appointmentRouter from './appointments.routes';
 
 const routes = Router();
 
-routes.get('/', (req, res) => {
-  return res.json({ msg: true });
-});
-
-routes.post('/user', (req, res) => {
-  const { name, email } = req.body;
-
-  const user = {
-    name,
-    email,
-  };
-  return res.json();
-});
+// toda rota que começar com /appointments irá para o middleware appointmentRouter
+routes.use('/appointments', appointmentRouter);
 
 export default routes;
