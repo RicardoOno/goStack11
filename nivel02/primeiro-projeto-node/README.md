@@ -26,3 +26,8 @@ Habilidade do eslint entender o import de um ts
 Deixar o codigo mais bonito. Integração com o ESLint
 
 `yarn add prettier eslint-config-prettier eslint-plugin-prettier -D`
+
+# Debug in VSCode
+
+`attach`: debugar em modo depuração
+`--inspect`: um listener do debug
