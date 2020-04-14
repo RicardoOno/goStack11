@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from 'express';
 
 const routes = Router();
 
@@ -11,8 +11,8 @@ routes.post('/user', (req, res) => {
 
   const user = {
     name,
-    email
-  }
+    email,
+  };
   return res.json();
 });
 
