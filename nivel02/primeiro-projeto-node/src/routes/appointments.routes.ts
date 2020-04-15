@@ -7,6 +7,7 @@ const appointmentsRouter = Router();
 const appointmentsRepository = new AppointmentsRepository();
 
 // SoC: Separation of Concers (Separação de preocupação)
+// DTO: Data Transfer Object (transferencia de dado)
 
 appointmentsRouter.get('/', (req, res) => {
   const repositories = appointmentsRepository.all();
@@ -30,7 +31,10 @@ appointmentsRouter.post('/', (req, res) => {
       .json({ error: 'This appointment is already booked' });
   }
 
-  const appointment = appointmentsRepository.create(provider, parseDate);
+  const appointment = appointmentsRepository.create({
+    provider,
+    date: parseDate,
+  });
 
   return res.status(200).json(appointment);
 });

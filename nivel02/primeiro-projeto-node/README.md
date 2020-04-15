@@ -31,3 +31,7 @@ Deixar o codigo mais bonito. Integração com o ESLint
 
 `attach`: debugar em modo depuração
 `--inspect`: um listener do debug
+
+# Typescript
+
+`Omit<[interface], 'variavel'>` -> omitir uma variavel. Ex, id com uuid();
