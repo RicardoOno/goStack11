@@ -1,10 +1,9 @@
 import { Router } from 'express';
-import { startOfHour, parseISO, isEqual } from 'date-fns';
-import Appointment from '../models/Appointments';
+import { startOfHour, parseISO } from 'date-fns';
+import AppointmentsRepository from '../repositories/AppointmentsRepository';
 
 const appointmentsRouter = Router();
-
-const appointments: Appointment[] = [];
+const appointmentsRepository = new AppointmentsRepository();
 
 // Como já foi definido a rota, não há necessidade de add toda a rota /appointments/, e sim só o /
 appointmentsRouter.post('/', (req, res) => {
@@ -13,9 +12,8 @@ appointmentsRouter.post('/', (req, res) => {
   // zerando os minutos e segundos
   const parseDate = startOfHour(parseISO(date));
 
-  // variicando se não há ja um agendamento na mesma hora
-  const findAppointmentInSameDate = appointments.find(a =>
-    isEqual(parseDate, a.date),
+  const findAppointmentInSameDate = appointmentsRepository.findByDate(
+    parseDate,
   );
 
   if (findAppointmentInSameDate) {
@@ -24,9 +22,7 @@ appointmentsRouter.post('/', (req, res) => {
       .json({ error: 'This appointment is already booked' });
   }
 
-  const appointment = new Appointment(provider, parseDate);
-
-  appointments.push(appointment);
+  const appointment = appointmentsRepository.create(provider, parseDate);
 
   return res.status(200).json(appointment);
 });
