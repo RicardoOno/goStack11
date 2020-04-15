@@ -1,7 +1,9 @@
 import { Router } from 'express';
-import { startOfHour, parseISO } from 'date-fns';
+import { parseISO } from 'date-fns';
 
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
+
+import CreateAppointmentService from '../services/CreateAppointmentService';
 
 const appointmentsRouter = Router();
 const appointmentsRepository = new AppointmentsRepository();
@@ -16,27 +18,25 @@ appointmentsRouter.get('/', (req, res) => {
 
 // Como já foi definido a rota, não há necessidade de add toda a rota /appointments/, e sim só o /
 appointmentsRouter.post('/', (req, res) => {
-  const { provider, date } = req.body;
+  // throw do service.execute
+  try {
+    const { provider, date } = req.body;
 
-  // zerando os minutos e segundos
-  const parseDate = startOfHour(parseISO(date));
+    // zerando os minutos e segundos
+    const parsedDate = parseISO(date); // transformação de dado a gente deixa na rota
+    const createAppointment = new CreateAppointmentService(
+      appointmentsRepository,
+    );
 
-  const findAppointmentInSameDate = appointmentsRepository.findByDate(
-    parseDate,
-  );
+    const appointment = createAppointment.execute({
+      provider,
+      date: parsedDate,
+    });
 
-  if (findAppointmentInSameDate) {
-    return res
-      .status(400)
-      .json({ error: 'This appointment is already booked' });
+    return res.status(200).json(appointment);
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
   }
-
-  const appointment = appointmentsRepository.create({
-    provider,
-    date: parseDate,
-  });
-
-  return res.status(200).json(appointment);
 });
 
 export default appointmentsRouter;

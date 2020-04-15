@@ -35,3 +35,16 @@ Deixar o codigo mais bonito. Integração com o ESLint
 # Typescript
 
 `Omit<[interface], 'variavel'>` -> omitir uma variavel. Ex, id com uuid();
+
+# Rota
+
+Recebe requisição -> repassa para outro arquivo -> retornar a resposta
+
+## Service
+
+- Tem uma unica responsabilidade (fazer a regra de negocio);
+- Transformação de dados não entra nos services
+
+## Dependency Inversion
+
+- Passando dados via constructor
