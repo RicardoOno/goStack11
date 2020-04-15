@@ -1,9 +1,17 @@
 import { Router } from 'express';
 import { startOfHour, parseISO } from 'date-fns';
+
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 
 const appointmentsRouter = Router();
 const appointmentsRepository = new AppointmentsRepository();
+
+// SoC: Separation of Concers (Separação de preocupação)
+
+appointmentsRouter.get('/', (req, res) => {
+  const repositories = appointmentsRepository.all();
+  return res.json(repositories);
+});
 
 // Como já foi definido a rota, não há necessidade de add toda a rota /appointments/, e sim só o /
 appointmentsRouter.post('/', (req, res) => {
