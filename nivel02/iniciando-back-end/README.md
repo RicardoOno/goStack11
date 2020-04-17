@@ -28,3 +28,8 @@ comando: `docker run --name gostack_postgres -e POSTGRES_PASSWORD=docker -p 5432
 # DBeaver
 
 Conectar a diversos bds
+
+# pg
+
+Driver do postgres
+
