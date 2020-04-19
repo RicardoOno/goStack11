@@ -3,6 +3,7 @@ import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
 import User from '../models/Users';
+import authConfig from '../config/auth';
 
 interface Request {
   email: string;
@@ -30,9 +31,9 @@ class AuthenticationUserService {
       throw new Error('Incorrect email/password');
     }
 
-    const token = sign({}, '3516ab72241e50a895792f2bb1655b95', {
+    const token = sign({}, authConfig.jwt.secret, {
       subject: user.id,
-      expiresIn: '1d',
+      expiresIn: authConfig.jwt.expiresIn,
     });
 
     return {

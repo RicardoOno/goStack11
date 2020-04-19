@@ -57,3 +57,11 @@ Side notes:
 
 # Repostory
 - Se cria um Repository.ts quando se há funções personalizadas como por exemplo o findById
+
+# Forçar o tipo de uma variavel
+
+`const { varName } = [var] as [Interface]`
+
+# Alterar tipos de bibliotecas
+
+`@types > [libname].d.ts`
