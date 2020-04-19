@@ -10,11 +10,11 @@ sessionsRouter.post('/', async (req, res) => {
 
     const session = new AuthenticationUserService();
 
-    const { user } = await session.execute({ email, password });
+    const { user, token } = await session.execute({ email, password });
 
     delete user.password;
 
-    return res.status(200).json({ user });
+    return res.status(200).json({ user, token });
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }
