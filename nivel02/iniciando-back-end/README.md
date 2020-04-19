@@ -33,3 +33,25 @@ Conectar a diversos bds
 
 Driver do postgres
 
+# Migrations
+
+- Creating:
+`yarn typeorm migration:create -n CreateAppointments`
+
+- Runing:
+`yarn typeorm migration:run`
+
+- Back a migration:
+`yarn typeorm migration:revert`
+
+- Show all migrations:
+`yarn typeorm migration:show`
+
+Side notes:
+
+- So pode alterar uma migration se ela ainda nao foi enviada para algum sistema de versão, outrso devs ou para produção
+
+## Understanding Migrations
+
+- Controlam nosso BD como git com uma timeline
+
