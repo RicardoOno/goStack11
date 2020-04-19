@@ -55,3 +55,5 @@ Side notes:
 
 - Controlam nosso BD como git com uma timeline
 
+# Repostory
+- Se cria um Repository.ts quando se há funções personalizadas como por exemplo o findById
