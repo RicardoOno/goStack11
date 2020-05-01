@@ -7,7 +7,8 @@ import Dashboard from '../pages/Dashboard';
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={Dashboard} />
-    <Route path="/repository" component={Repository} />
+    {/* Tudo que vier depois de :repository+ é parametro */}
+    <Route path="/repositories/:repository+" component={Repository} />
   </Switch>
 );
 
