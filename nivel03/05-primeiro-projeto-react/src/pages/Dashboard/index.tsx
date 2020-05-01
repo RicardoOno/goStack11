@@ -5,7 +5,7 @@ import api from '../../services/api';
 
 import logoImg from '../../assets/github-logo.svg';
 
-import { Title, Form, Repositories } from './styles';
+import { Title, Form, Repositories, Error } from './styles';
 
 interface Repository {
   // na tipagem so precisa colocar informações do que ira utilizar
@@ -19,6 +19,7 @@ interface Repository {
 
 const Dashboard: React.FC = () => {
   const [newRepo, setNewRepo] = useState('');
+  const [inputError, setInputError] = useState('');
   const [repositories, setRepositories] = useState<Repository[]>([]);
 
   async function handleAddRepository(
@@ -26,27 +27,37 @@ const Dashboard: React.FC = () => {
   ): Promise<void> {
     event.preventDefault();
 
-    const response = await api.get<Repository>(`repos/${newRepo}`);
+    if (!newRepo) {
+      setInputError('Digite o autor/nome do repositorio');
+      return;
+    }
 
-    const repository = response.data;
-
-    setRepositories([...repositories, repository]);
-
-    setNewRepo('');
+    try {
+      const response = await api.get<Repository>(`repos/${newRepo}`);
+      const repository = response.data;
+      setRepositories([...repositories, repository]);
+      setNewRepo('');
+      setInputError('');
+    } catch (e) {
+      setInputError('Erro na busca por esse repositorio');
+    }
   }
 
   return (
     <>
       <img src={logoImg} alt="GitHub Eplorer" />
       <Title>Explore repositórios no Github</Title>
-
-      <Form onSubmit={handleAddRepository}>
+      {/* !! => nao é fazio */}
+      <Form hasError={!!inputError} onSubmit={handleAddRepository}>
         <input
           placeholder="Digite o nome do repositorio"
           onChange={(e) => setNewRepo(e.target.value)}
         />
         <button type="submit">Pesquisar</button>
       </Form>
+
+      {inputError && <Error>{inputError}</Error>}
+
       <Repositories>
         {repositories.map((r) => (
           <a key={r.full_name} href="teste">
